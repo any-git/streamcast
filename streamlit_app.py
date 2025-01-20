@@ -29,15 +29,13 @@ url = st.text_input("Enter a URL:")
 if url:
     driver = get_driver()
     driver.get(url)
-    screenshot = driver.get_screenshot_as_png()
     logs = driver.get_log("performance")
-    st.image(screenshot)
     st.write("Logs:")
     for entry in logs:
-        message = entry["message"]
-        try:
-            # Parse JSON để lấy URL
-            url = eval(message)["message"]["params"]["request"]["url"]
-            st.code(url)
-        except:
-            continue
+        log = json.loads(entry["message"])["message"]
+        if (
+            "Network.response" in log["method"]
+            or "Network.request" in log["method"]
+            or "Network.webSocket" in log["method"]
+        ):
+            st.write(log)
