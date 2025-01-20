@@ -15,8 +15,14 @@ capabilities["goog:loggingPrefs"] = {"performance": "ALL"}
 @st.cache_resource
 def get_driver():
     options = Options()
+    options.add_argument("--headless")  # Chế độ headless
     options.add_argument("--disable-gpu")
-    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")  # Hạn chế bộ nhớ chia sẻ
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-background-networking")
+    options.add_argument("--disable-renderer-backgrounding")
+    options.add_argument("--window-size=1920,1080")  # Đặt kích thước cửa sổ ảo
     options.set_capability("goog:loggingPrefs", {"performance": "ALL"})
 
     return webdriver.Chrome(
