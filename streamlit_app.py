@@ -16,10 +16,11 @@ def get_driver():
     options = Options()
     options.add_argument("--disable-gpu")
     options.add_argument("--headless")
+    options.set_capability("goog:loggingPrefs", {"performance": "ALL"})
+
     return webdriver.Chrome(
         service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()),
         options=options,
-        desired_capabilities=capabilities,
     )
 
 
