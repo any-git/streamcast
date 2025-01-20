@@ -17,8 +17,10 @@ def get_driver():
     )
 
 
-with st.echo():
+url = st.text_input("Enter a URL:")
+
+if url:
     driver = get_driver()
-    driver.get("http://example.com")
+    driver.get(url)
     screenshot = driver.get_screenshot_as_png()
     st.image(screenshot)
