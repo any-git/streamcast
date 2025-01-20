@@ -41,5 +41,3 @@ if url:
             st.code(url)
         except:
             continue
-
-    driver.quit()
